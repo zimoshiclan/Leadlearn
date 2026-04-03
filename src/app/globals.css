@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 20% 4%;
+    --foreground: 240 22% 93%;
+    --card: 240 18% 9%;
+    --card-foreground: 240 22% 93%;
+    --popover: 240 18% 9%;
+    --popover-foreground: 240 22% 93%;
+    --primary: 243 100% 69%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 348 100% 70%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 14% 48%;
+    --muted-foreground: 240 14% 48%;
+    --accent: 240 18% 13%;
+    --accent-foreground: 240 22% 93%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 240 22% 98%;
+    --border: 240 19% 20%;
+    --input: 240 19% 20%;
+    --ring: 243 100% 69%;
+    --radius: 0.75rem;
+
+    /* Custom accent colors for LeadLearn */
+    --success: 143 78% 59%;
+    --warning: 35 94% 54%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.3;
+  }
+}
+
+@layer components {
+  .logo-text {
+    @apply font-headline text-3xl tracking-[2px] bg-gradient-to-br from-[#6C63FF] to-[#FF6584] bg-clip-text text-transparent;
+  }
+
+  .page-title {
+    @apply font-headline text-5xl tracking-[2px] leading-none bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent;
+  }
+
+  .stat-card-gradient::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-[2px];
+  }
+
+  .stat-card-1::before { background: linear-gradient(90deg, #6C63FF, transparent); }
+  .stat-card-2::before { background: linear-gradient(90deg, #FF6584, transparent); }
+  .stat-card-3::before { background: linear-gradient(90deg, #43E97B, transparent); }
+  .stat-card-4::before { background: linear-gradient(90deg, #F7971E, transparent); }
+
+  .xp-fill-animate {
+    animation: xpPulse 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes xpPulse {
+  from { box-shadow: 0 0 6px rgba(108, 99, 255, 0.3); }
+  to { box-shadow: 0 0 12px rgba(108, 99, 255, 0.6); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(67, 233, 123, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(67, 233, 123, 0); }
+}
+
+.ai-indicator-pulse {
+  animation: pulse-ring 2s infinite;
+}
